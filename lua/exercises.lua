@@ -22,6 +22,7 @@ end
 -- Write your line count function here
 
 -- Write your Quaternion table here
+
 Quaternion = {}
 Quaternion.__index = Quaternion
 
@@ -57,24 +58,49 @@ end
 
 function Quaternion.__tostring(q)
   local parts = {}
-  if q.a ~= 0 then
+
+  local function format_term(value, letter)
+    if math.abs(value) < 1e-10 then
+      return ''
+    elseif math.abs(value - 1) < 1e-10 then
+      return letter
+    elseif math.abs(value + 1) < 1e-10 then
+      return '-' .. letter
+    else
+      return string.format("%.1f%s", value, letter)
+    end
+  end
+
+  if math.abs(q.a) >= 1e-10 then
     table.insert(parts, string.format("%.1f", q.a))
   end
-  if q.b ~= 0 then
-    table.insert(parts, string.format("%+.1fi", q.b))
+
+  if math.abs(q.b) >= 1e-10 then
+    table.insert(parts, format_term(q.b, 'i'))
   end
-  if q.c ~= 0 then
-    table.insert(parts, string.format("%+.1fj", q.c))
+
+  if math.abs(q.c) >= 1e-10 then
+    table.insert(parts, format_term(q.c, 'j'))
   end
-  if q.d ~= 0 then
-    table.insert(parts, string.format("%+.1fk", q.d))
+
+  if math.abs(q.d) >= 1e-10 then
+    table.insert(parts, format_term(q.d, 'k'))
   end
 
   if #parts == 0 then
     return "0"
   end
 
-  return table.concat(parts):gsub("^%+", "")
+  local result = parts[1]
+  for i = 2, #parts do
+    if parts[i]:sub(1, 1) == '-' then
+      result = result .. parts[i]
+    else
+      result = result .. '+' .. parts[i]
+    end
+  end
+
+  return result
 end
 
 function Quaternion:coefficients()
