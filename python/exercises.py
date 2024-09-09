@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from collections.abc import Callable
-from dataclasses import dataclass
 from typing import Tuple
+import math
 
 
 def change(amount: int) -> dict[int, int]:
@@ -64,72 +64,79 @@ def meaningful_line_count(filename: str) -> int:
 
 
 # Write your Quaternion class here
-from dataclasses import dataclass
-from typing import Tuple
-
 @dataclass(frozen=True)
 class Quaternion:
     a: float
     b: float
     c: float
     d: float
-    @property
-    def coefficients(self) -> Tuple[float, float, float, float]:
-        return (self.a, self.b, self.c, self.d)
-    @property
-    def conjugate(self) -> 'Quaternion':
-        return Quaternion(self.a, -self.b, -self.c, -self.d)
 
     def __add__(self, other: 'Quaternion') -> 'Quaternion':
-        if not isinstance(other, Quaternion):
-            return NotImplemented
         return Quaternion(
             self.a + other.a,
             self.b + other.b,
             self.c + other.c,
             self.d + other.d
         )
+
     def __mul__(self, other: 'Quaternion') -> 'Quaternion':
-        if not isinstance(other, Quaternion):
-            return NotImplemented
         return Quaternion(
             self.a * other.a - self.b * other.b - self.c * other.c - self.d * other.d,
             self.a * other.b + self.b * other.a + self.c * other.d - self.d * other.c,
             self.a * other.c - self.b * other.d + self.c * other.a + self.d * other.b,
             self.a * other.d + self.b * other.c - self.c * other.b + self.d * other.a
         )
-    def __eq__(self, other: 'Quaternion') -> bool:
+
+    def __eq__(self, other: object) -> bool:
         if not isinstance(other, Quaternion):
             return NotImplemented
-        return (self.a, self.b, self.c, self.d) == (other.a, other.b, other.c, other.d)
+        return (
+            math.isclose(self.a, other.a) and
+            math.isclose(self.b, other.b) and
+            math.isclose(self.c, other.c) and
+            math.isclose(self.d, other.d)
+        )
+
     def __str__(self) -> str:
         parts = []
-        if self.a != 0 or not any([self.b, self.c, self.d]):
+
+        def format_term(value: float, letter: str) -> str:
+            if math.isclose(value, 0):
+                return ''
+            if math.isclose(value, 1):
+                return letter
+            if math.isclose(value, -1):
+                return '-' + letter
+            return f"{value}{letter}"
+
+        if not math.isclose(self.a, 0):
             parts.append(f"{self.a}")
-        if self.b != 0:
-            if self.b == 1:
-                parts.append("i")
-            elif self.b == -1:
-                parts.append("-i")
-            else:
-                parts.append(f"{self.b}i")
-        if self.c != 0:
-            if self.c == 1:
-                parts.append("+j" if parts else "j")
-            elif self.c == -1:
-                parts.append("-j")
-            else:
-                parts.append(f"+{self.c}j" if self.c > 0 else f"{self.c}j")
-        if self.d != 0:
-            if self.d == 1:
-                parts.append("+k" if parts else "k")
-            elif self.d == -1:
-                parts.append("-k")
-            else:
-                parts.append(f"+{self.d}k" if self.d > 0 else f"{self.d}k")
-        if not parts:
+
+        if not math.isclose(self.b, 0):
+            parts.append(format_term(self.b, 'i'))
+
+        if not math.isclose(self.c, 0):
+            parts.append(format_term(self.c, 'j'))
+
+        if not math.isclose(self.d, 0):
+            parts.append(format_term(self.d, 'k'))
+
+        if len(parts) == 0:
             return "0"
-        result = ''.join(parts)
-        result = result.lstrip('+')
+
+        result = parts[0]
+        for part in parts[1:]:
+            if part.startswith('-'):
+                result += part
+            else:
+                result += '+' + part
 
         return result
+
+    @property
+    def coefficients(self) -> Tuple[float, float, float, float]:
+        return self.a, self.b, self.c, self.d
+
+    @property
+    def conjugate(self) -> 'Quaternion':
+        return Quaternion(self.a, -self.b, -self.c, -self.d)
