@@ -26,6 +26,7 @@ export function change(amount) {
 // Write your Quaternion class here
 
 export class Quaternion {
+  // constructor to initialize quaternion
   constructor(a, b, c, d) {
     this.a = a;
     this.b = b;
@@ -34,18 +35,22 @@ export class Quaternion {
     Object.freeze(this);
   }
 
+  // return the coefficients of the quaternion as an array
   get coefficients() {
     return [this.a, this.b, this.c, this.d];
   }
 
+  // return the conjugate of the quaternion
   get conjugate() {
     return new Quaternion(this.a, -this.b, -this.c, -this.d);
   }
 
+  // add another quaternion to this quaternion
   plus(q) {
     return new Quaternion(this.a + q.a, this.b + q.b, this.c + q.c, this.d + q.d);
   }
 
+  // multiply this quaternion by another quaternion
   times(q) {
     return new Quaternion(
       this.a * q.a - this.b * q.b - this.c * q.c - this.d * q.d,
@@ -55,13 +60,16 @@ export class Quaternion {
     );
   }
 
+  // return a string representation of the quaternion
   toString() {
     const parts = [];
-  
+
+    // Add real part if it's not zero
     if (this.a !== 0) {
       parts.push(`${this.a}`);
     }
-  
+
+    // add 'i' part if it's not zero
     if (this.b !== 0) {
       if (parts.length === 0) {
         if (Math.abs(this.b) === 1) {
@@ -77,7 +85,8 @@ export class Quaternion {
         }
       }
     }
-  
+
+    // add 'j' part if it's not zero
     if (this.c !== 0) {
       if (parts.length === 0) {
         if (Math.abs(this.c) === 1) {
@@ -93,7 +102,8 @@ export class Quaternion {
         }
       }
     }
-  
+
+    // add 'k' part if it's not zero
     if (this.d !== 0) {
       if (parts.length === 0) {
         if (Math.abs(this.d) === 1) {
@@ -109,7 +119,8 @@ export class Quaternion {
         }
       }
     }
-  
+
+    // return '0' if no parts were added, otherwise join the parts into a string
     return parts.length === 0 ? '0' : parts.join('');
   }
   
