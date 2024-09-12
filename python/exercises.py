@@ -72,6 +72,10 @@ class Quaternion:
     d: float
 
     def __add__(self, other: 'Quaternion') -> 'Quaternion':
+        """
+        Adds two quaternions, 
+        returns sum
+        """
         return Quaternion(
             self.a + other.a,
             self.b + other.b,
@@ -80,6 +84,10 @@ class Quaternion:
         )
 
     def __mul__(self, other: 'Quaternion') -> 'Quaternion':
+        """
+        Multiplies two quaternions, 
+        returns product
+        """
         return Quaternion(
             self.a * other.a - self.b * other.b - self.c * other.c - self.d * other.d,
             self.a * other.b + self.b * other.a + self.c * other.d - self.d * other.c,
@@ -88,6 +96,10 @@ class Quaternion:
         )
 
     def __eq__(self, other: object) -> bool:
+        """
+        Checks if two quaternions are equal
+        returns true if both quaternions are equal, false otherwise
+        """
         if not isinstance(other, Quaternion):
             return NotImplemented
         return (
@@ -98,9 +110,15 @@ class Quaternion:
         )
 
     def __str__(self) -> str:
+        """
+        Returns a string representation of the quaternion in the form 'a + bi + cj + dk'
+        """
         parts = []
 
         def format_term(value: float, letter: str) -> str:
+            """
+            Formats a term of the quaternion for string representation, and returns it
+            """
             if math.isclose(value, 0):
                 return ''
             if math.isclose(value, 1):
@@ -135,8 +153,14 @@ class Quaternion:
 
     @property
     def coefficients(self) -> Tuple[float, float, float, float]:
+        """
+        Returns the coefficients of the quaternion as a tuple
+        """
         return self.a, self.b, self.c, self.d
 
     @property
     def conjugate(self) -> 'Quaternion':
+        """
+        Returns the conjugate of the quaternion
+        """
         return Quaternion(self.a, -self.b, -self.c, -self.d)
