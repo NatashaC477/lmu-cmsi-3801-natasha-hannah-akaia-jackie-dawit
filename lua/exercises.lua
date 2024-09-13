@@ -13,12 +13,37 @@ function change(amount)
   return counts
 end
 
--- Write your first then lower case function here
+function first_then_lower_case(array, predicate)
+  for _, value in pairs(array) do
+    if predicate(value) then
+      return string.lower(value)
+    end
+  end
+  return nil
+end
 
--- Write your powers generator here
+function powers_generator(base, limit)
+  local power = 1
+  return coroutine.create(function()
+    while power <= limit do
+      coroutine.yield(power)
+      power = power * base
+    end
+  end)
+end
 
--- Write your say function here
-
+function say(word)
+  if word == nil then
+      return ""
+  end
+  return function(next)
+      if next == nil then
+          return word
+      else
+          return say(word .. " " .. next)
+      end
+  end
+end
 -- Write your line count function here
 
 -- Write your Quaternion table here
