@@ -18,8 +18,8 @@ export function change(amount) {
 // Write your first then lower case function here
 //used helper video as reference
 export function firstThenLowerCase(strings, predicate) {
-  const firstTrue = strings.find(predicate);
-  return firstTrue?.toLowerCase() // ? is the optional chaining operator which means that even if nothing is ever true there won't be an error thrown
+  const firstTrue = strings.find(predicate); // finds first case where predicate is true among the strings
+  return firstTrue?.toLowerCase() // returns true case if there is one, ? chaining operator allows for cases where nothing is true
 }
 
 // Write your powers generator here
@@ -29,8 +29,8 @@ export function firstThenLowerCase(strings, predicate) {
 export function* powersGenerator({ ofBase: base, upTo: limit }) {
   let power = 1;
   while(power <= limit) {
-    yield power; // to help pause the function and resume when called again
-    power = power * base;
+    yield power; // pauses the function and resumes when function is called again
+    power = power * base; // multiplies current power with base value 
   }
 }
 
@@ -40,7 +40,7 @@ export function say(string) {
     return '';
   }
   return nextString => nextString !== undefined ? say(string + ' ' + nextString) : string
-  //used an arrow function to call the say function because we don't have the parameter for the next input of the changing function call
+  //used an arrow function to call the say function if the next input of the chaining function call is not undefined ()
 }
 
 // Write your line count function here
