@@ -40,7 +40,7 @@ export function say(string) {
     return '';
   }
   return nextString => nextString !== undefined ? say(string + ' ' + nextString) : string
-  //used an arrow function to call the say function if the next input of the chaining function call is not undefined ()
+  //used an arrow function to call the say function if the next input of the chaining function call is not undefined () else return the current string
 }
 
 // Write your line count function here
