@@ -47,6 +47,30 @@ export function say(string) {
 
 // Write your line count function here
 
+import { promises as fs } from 'fs';
+
+async function meaningfulLineCount(filename) {
+  try {
+    const data = await fs.readFile(filename, 'utf-8');// utf-8: allows for file content to interpreted as text
+
+    const lines = data.split('\n').filter(line => { //filters the meaningful line via .split
+      line = line.trim(); // removes white space
+      return line && !line.startsWith('#');
+    });
+    
+    return lines.length; // returns count of meaningful lines
+
+  } catch (error) {
+    if (error.code == 'ENOENT') {
+      throw new Error(`No such file: ${filename}`);
+
+    } else {
+      throw error;
+    }
+  }
+}
+
+export { meaningfulLineCount };
 // Write your Quaternion class here
 
 export class Quaternion {
