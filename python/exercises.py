@@ -16,34 +16,46 @@ def change(amount: int) -> dict[int, int]:
 
 
 # Write your first then lower case function here
+''' iterates over a string-- and checks if the item satisfies the predicate function'''
 def first_then_lower_case(lst, predicate):
     for item in lst:
         if predicate(item):
             return item.lower()
+        ''' if not, return none'''
     return None
 
 # Write your powers generator here
+''' generator function  yields powers of a base up to a specified limit '''
 def powers_generator(base: int, limit: int):
-    power = 1
-    while power <= limit:
-        yield power
-        power *= base
+    power = 1  
+    while power <= limit:  
+        yield power  
+        '''multiply the current power by the base to get the next power'''
+        power *= base 
+
 
 
 # Write your say function here
+# Function that accumulates words and returns them as a single space-separated string
 def say(word=None):
-    words = []
-    
+    '''initialize an empty list to store the words'''
+    words = [] 
+    '''handle adding new words or returning the result'''
     def inner(new_word=None):
-        if new_word is not None:
-            words.append(new_word)
-            return inner
-        return ' '.join(words)
+        if new_word is not None: 
+            ''' add the new word to the list '''
+            words.append(new_word)  
+            return inner  
+        '''check for new word if not return the accumulated words as a space-separated string'''
+        return ' '.join(words)  
     
-    if word is not None:
-        words.append(word)
-        return inner
-    return inner()
+    if word is not None:  
+        '''add initial word to list'''
+        words.append(word)  
+        return inner  
+    '''if no initial word is provided, return the result of the inner function immediately'''
+    return inner()  
+
 
 
 
@@ -52,13 +64,16 @@ def say(word=None):
 def meaningful_line_count(filename: str) -> int:
     try:
         with open(filename, 'r') as file:
-            count = 0
+            '''initialize a counter for meaningful lines'''
+            count = 0  
             for line in file:
-                line = line.strip()
-                if line and not line.startswith('#'):
-                    count += 1
-            return count
-    except FileNotFoundError as e:
+                '''remove front and end whitespace'''
+                line = line.strip()  
+                if line and not line.startswith('#'): 
+                    count += 1  
+                    '''' Return the final count of meaningful lines'''
+            return count  
+    except FileNotFoundError as e:  
         raise FileNotFoundError(f'No such file: {filename}') from e
 
 
