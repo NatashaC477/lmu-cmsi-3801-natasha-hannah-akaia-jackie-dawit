@@ -13,40 +13,80 @@ function change(amount)
   return counts
 end
 
+-- This function takes an array and a predicate function as arguments
+-- It returns the first value that satisfies the predicate, converted to lowercase
+-- If no value satisfies the predicate, it returns nil
 function first_then_lower_case(array, predicate)
+  -- Iterate through each value in the array
   for _, value in pairs(array) do
-    if predicate(value) then
-      return string.lower(value)
-    end
+      -- Check if the current value satisfies the predicate function
+      if predicate(value) then
+          -- If it does, immediately return the lowercase version of this value
+          return string.lower(value)
+      end
   end
+  -- If no value in the array satisfies the predicate, return nil
   return nil
 end
 
+-- This function creates a generator for powers of a given base up to a specified limit
+-- It returns a coroutine that yields successive powers
 function powers_generator(base, limit)
+  -- Initialize the power to 1 (anything to the power of 0 is 1)
   local power = 1
+  -- Create and return a new coroutine
   return coroutine.create(function()
-    while power <= limit do
-      coroutine.yield(power)
-      power = power * base
-    end
+      -- Continue generating powers while we're below or equal to the limit
+      while power <= limit do
+          -- Yield the current power value
+          coroutine.yield(power)
+          -- Calculate the next power by multiplying the current power by the base
+          power = power * base
+      end
   end)
 end
 
+-- This function creates a sentence builder
+-- It takes a word as an argument and returns a function that can be used to build a sentence
 function say(word)
+  -- If no word is provided (nil), return an empty string
   if word == nil then
       return ""
   end
+  
+  -- Return a new function that takes the next word as an argument
   return function(next)
+      -- If there's no next word, we've reached the end of the sentence
       if next == nil then
+          -- Return the current word, effectively ending the sentence
           return word
       else
+          -- If there is a next word, recursively call say() with the current word
+          -- concatenated with a space and the next word
           return say(word .. " " .. next)
       end
   end
 end
--- Write your line count function here
 
--- Write your Quaternion table here
+function meaningful_line_count(user_file)
+  -- We open the file here
+  local file = assert(io.open(user_file, "r"))
+  -- Initialize a counter for meaningful lines
+  local count = 0
+  -- Read the file line by line
+  for line in file:lines() do
+      -- Trim leading and trailing whitespace
+      line = line:match("^%s*(.-)%s*$")
+      -- Check if the line is not empty and doesn't start with '#'
+      if line ~= "" and line:sub(1, 1) ~= "#" then
+          count = count + 1
+      end
+  end
+  -- Close the file
+  file:close()
+  -- If count is 0, return an empty table, otherwise return the count
+  return count > 0 and count or {}
+end
 
 -- quaternion class
 Quaternion = {}
