@@ -139,13 +139,13 @@ function Quaternion.__tostring(q)
     elseif math.abs(value + 1) < 1e-10 then
       return '-' .. letter
     else
-      return string.format("%.1f%s", value, letter)
+      return value .. letter
     end
   end
 
    -- add real part if not zero
   if math.abs(q.a) >= 1e-10 then
-    table.insert(parts, string.format("%.1f", q.a))
+    table.insert(parts, q.a)
   end
 
     -- add 'i', 'j', 'k' parts if not zero
