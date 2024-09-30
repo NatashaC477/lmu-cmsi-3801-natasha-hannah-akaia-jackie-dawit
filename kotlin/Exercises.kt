@@ -1,6 +1,8 @@
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
+import java.io.File
+
 
 fun change(amount: Long): Map<Int, Long> {
     require(amount >= 0) { "Amount cannot be negative" }
@@ -19,6 +21,24 @@ fun change(amount: Long): Map<Int, Long> {
 // Write your say function here
 
 // Write your meaningfulLineCount function here
+fun meaningfulLineCount(filename: String): Long {
+    return try {
+        BufferedReader(FileReader(File(filename))).use { reader ->
+            var count: Long = 0
+            reader.forEachLine { line ->
+                val trimmedLine = line.trim()
+                // Check if the line is not empty and doesn't start with a comment ('#')
+                if (trimmedLine.isNotEmpty() && !trimmedLine.startsWith("#")) {
+                    count++
+                }
+            }
+            count
+        }
+    } catch (e: IOException) {
+        throw IOException("No such file: $filename", e)
+    }
+}
+
 
 // Write your Quaternion data class here
 
