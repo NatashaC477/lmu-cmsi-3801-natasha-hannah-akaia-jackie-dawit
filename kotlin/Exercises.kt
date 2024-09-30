@@ -23,18 +23,21 @@ fun change(amount: Long): Map<Int, Long> {
 // Write your meaningfulLineCount function here
 fun meaningfulLineCount(filename: String): Long {
     return try {
+        //open file with buffered reader
         BufferedReader(FileReader(File(filename))).use { reader ->
-            var count: Long = 0
+            var count: Long = 0 //counter to track lines
             reader.forEachLine { line ->
+                //remove white space 
                 val trimmedLine = line.trim()
-                // Check if the line is not empty and doesn't start with a comment ('#')
                 if (trimmedLine.isNotEmpty() && !trimmedLine.startsWith("#")) {
                     count++
                 }
             }
+            //return total count
             count
         }
     } catch (e: IOException) {
+        //if not found or opened throw
         throw IOException("No such file: $filename", e)
     }
 }
