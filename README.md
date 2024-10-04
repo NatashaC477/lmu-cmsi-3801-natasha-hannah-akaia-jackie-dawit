@@ -1,9 +1,9 @@
 ## Programming Languages Homework
-Group Members:
-Natasha
-Hannah
-A'kaia
-Jacquelyn Young-Bowers
+Group Members:<br>
+Natasha <br>
+Hannah <br>
+A'kaia <br>
+Jacquelyn Young-Bowers <be>
 Dawit
 
 
