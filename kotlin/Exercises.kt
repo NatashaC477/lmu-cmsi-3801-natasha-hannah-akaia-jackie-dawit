@@ -106,11 +106,6 @@ data class Quaternion(val a: Double, val b: Double, val c: Double, val d: Double
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Quaternion) return false
-
-        return this.a == other.a &&
-               this.b == other.b &&
-               this.c == other.c &&
-               this.d == other.d
     }
 
     fun coefficients(): List<Double> = listOf(a, b, c, d)
