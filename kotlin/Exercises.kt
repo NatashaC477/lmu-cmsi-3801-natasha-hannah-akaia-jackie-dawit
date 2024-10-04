@@ -117,18 +117,18 @@ data class Quaternion(val a: Double, val b: Double, val c: Double, val d: Double
         
 
 // Write your Binary Search Tree interface and implementing classes here
+// Write your Binary Search Tree interface and implementing classes here
 sealed interface BinarySearchTree {
     // method to insert a new value into the tree, returning a new instance 
     fun insert(value: String): BinarySearchTree
     // method to check if a value is contained in the tree
     fun contains(value: String): Boolean
-    // methof to get the size of the tree (number of elements)
-    fun size(): Int
     // method to get the size of the tree (number of elements)
-    override fun to
-    String(): String
+    fun size(): Int
+    // method to get the string representation of the tree
+    override fun toString(): String
 
-//  representing an empty Binary Search Tree
+    // representing an empty Binary Search Tree
     object Empty : BinarySearchTree {
         override fun insert(value: String): BinarySearchTree {
             return Node(value, Empty, Empty)
@@ -140,19 +140,18 @@ sealed interface BinarySearchTree {
 
         override fun toString(): String = "()"
     }
-    // data class representing a node in the Binary Search Tree
 
+    // data class representing a node in the Binary Search Tree
     data class Node(
         val value: String,
         val left: BinarySearchTree = Empty,
         val right: BinarySearchTree = Empty
     ) : BinarySearchTree {
-          // insert a new value into the tree, maintaining binary search tree props
-
-        override fun insert(newValue: String): BinarySearchTree {
+        // insert a new value into the tree, maintaining binary search tree properties
+        override fun insert(value: String): BinarySearchTree {
             return when {
-                newValue < value -> Node(value, left.insert(newValue), right)
-                newValue > value -> Node(value, left, right.insert(newValue))
+                value < this.value -> Node(this.value, left.insert(value), right)
+                value > this.value -> Node(this.value, left, right.insert(value))
                 else -> this // Prevent duplicates
             }
         }
@@ -164,11 +163,11 @@ sealed interface BinarySearchTree {
                 else -> true // Value found
             }
         }
-       // calc the size of the tree, counting this node and its children
 
+        // calculate the size of the tree, counting this node and its children
         override fun size(): Int = 1 + left.size() + right.size()
-        // str representation of the tree in the expected format
 
+        // string representation of the tree in the expected format
         override fun toString(): String {
             val leftStr = left.toString().takeIf { it != "()" } ?: ""
             val rightStr = right.toString().takeIf { it != "()" } ?: ""
@@ -176,3 +175,4 @@ sealed interface BinarySearchTree {
         }
     }
 }
+
