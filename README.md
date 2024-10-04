@@ -1,5 +1,5 @@
 ## Programming Languages Homework
-**<u>Group Members:</u>**<br>
+**Group Members:** <br>
 Natasha <br>
 Hannah <br>
 A'kaia <br>
@@ -9,7 +9,7 @@ Dawit
 
 ## How to test in each coding language
 
-Homework #1: Lua, Python, JavaScript
+**Homework #1:** Lua, Python, JavaScript
 
 ### Lua
 
@@ -29,7 +29,7 @@ python3 exercises_test.py
 npm test
 ```
 
-Homework #2: Java, Kotlin, Swift
+**Homework #2:** Java, Kotlin, Swift
 ### Java
 
 ```
@@ -48,6 +48,7 @@ kotlinc *.kt -include-runtime -d test.jar && java -jar test.jar
 swiftc -o main exercises.swift main.swift && ./main
 ```
 
+**Homework #3:** TypeScript, OCaml, Haskell
 ### TypeScript
 
 ```
@@ -66,6 +67,7 @@ ocamlc exercises.ml exercises_test.ml && ./a.out
 ghc ExercisesTest.hs && ./ExercisesTest
 ```
 
+**Homework #4:** C, C++, Rust
 ### C
 
 ```
@@ -84,6 +86,7 @@ g++ -std=c++20 stack_test.cpp && ./a.out
 cargo test
 ```
 
+**Homework #5:** Go
 ### Go
 
 ```
