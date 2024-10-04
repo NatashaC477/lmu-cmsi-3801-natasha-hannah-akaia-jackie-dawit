@@ -36,7 +36,7 @@ fun meaningfulLineCount(filename: String): Long {
     return try {
         // open file with buffered reader
         BufferedReader(FileReader(File(filename))).use { reader ->
-            var count: Long = 0 //counter to track lines
+            var count: Long = 0 // counter to track lines
             reader.forEachLine { line ->
                 // remove white space 
                 val trimmedLine = line.trim()
