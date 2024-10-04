@@ -1,10 +1,10 @@
 ## Homework #2 Submission: Java, Kotlin, Swift
 **Group Members:** <br>
-Natasha <br>
-Hannah <br>
-A'kaia <br>
+Natasha Cordova-Diba <br>
+Hannah Holden <br>
+A'kaia Phelps <br>
 Jacquelyn Young-Bowers <br>
-Dawit
+Dawit Solomon
 
 ### Description:
 This Homework #2 Submission includes the code for Java, Kotlin, and Swift. In the rest of the readme file, the tests for those same coding languages will be found as well as a *checklist* for us to make sure our code follows the rubric and the coding languages styling/formatting. <br>
