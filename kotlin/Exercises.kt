@@ -16,22 +16,41 @@ fun change(amount: Long): Map<Int, Long> {
     return counts
 }
 
-
-// TOAL SAID TO CLAIM AN EXTRA POINT
-
 // Write your first then lower case function here
 fun firstThenLowerCase(strings: List<String>, predicate: (String) -> Boolean): String? { 
-    return string.firstOrNull(predicate)?.lowercase() //returns possible String, ?. operator which handles null cases
+    return string.firstOrNull(predicate)?.lowercase() // returns possible String, ?. operator which handles null cases
 }
 
 // Write your say function here
-class say(val sentence: String = "") { //set original sentence to "" for empty string cases
+class say(val sentence: String = "") { // set original sentence to "" for empty string cases
     fun and(nextWord: String): say {
         return say("${this.sentence} $nextWord") 
     }
 
     val phrase: String 
         get() = this.sentence
+}
+
+// Write your meaningfulLineCount function here
+fun meaningfulLineCount(filename: String): Long {
+    return try {
+        // open file with buffered reader
+        BufferedReader(FileReader(File(filename))).use { reader ->
+            var count: Long = 0 //counter to track lines
+            reader.forEachLine { line ->
+                // remove white space 
+                val trimmedLine = line.trim()
+                if (trimmedLine.isNotEmpty() && !trimmedLine.startsWith("#")) {
+                    count++
+                }
+            }
+            // return total count
+            count
+        }
+    } catch (e: IOException) {
+        // if not found or opened throw
+        throw IOException("No such file: $filename", e)
+    }
 }
 
 // Write your Quaternion data class here
@@ -99,30 +118,7 @@ data class Quaternion(val a: Double, val b: Double, val c: Double, val d: Double
     fun conjugate(): Quaternion = Quaternion(a, -b, -c, -d)
 }
 
-// Write your meaningfulLineCount function here
-fun meaningfulLineCount(filename: String): Long {
-    return try {
-        //open file with buffered reader
-        BufferedReader(FileReader(File(filename))).use { reader ->
-            var count: Long = 0 //counter to track lines
-            reader.forEachLine { line ->
-                //remove white space 
-                val trimmedLine = line.trim()
-                if (trimmedLine.isNotEmpty() && !trimmedLine.startsWith("#")) {
-                    count++
-                }
-            }
-            //return total count
-            count
-        }
-    } catch (e: IOException) {
-        //if not found or opened throw
-        throw IOException("No such file: $filename", e)
-    }
-}
 
-
-// Write your Quaternion data class here
 
 // Write your Binary Search Tree interface and implementing classes here
 sealed interface BinarySearchTree {
@@ -130,9 +126,9 @@ sealed interface BinarySearchTree {
     fun insert(value: String): BinarySearchTree
     // method to check if a value is contained in the tree
     fun contains(value: String): Boolean
-    //methof to get the size of the tree (number of elements)
+    // methof to get the size of the tree (number of elements)
     fun size(): Int
-    //method to get the size of the tree (number of elements)
+    // method to get the size of the tree (number of elements)
     override fun to
     String(): String
 
