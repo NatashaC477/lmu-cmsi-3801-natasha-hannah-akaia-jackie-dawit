@@ -38,7 +38,7 @@ swiftc -o main exercises.swift main.swift && ./main
 *Java Checklist:* <br>
 **Indentation**
 - [ ] Google Java Style Guide recommends using 4 spaces for indentation<br>
-**Naming**
+**Naming**<br>
 - [ ] Classes and Interfaces: PascalCase
 - [ ] Methods: camelCase
 - [ ] Constants: UPPER_SNAKE_CASE
@@ -46,9 +46,9 @@ swiftc -o main exercises.swift main.swift && ./main
 - [ ] Enum Type Names: PascalCase | Enum Constants: UPPER_SNAKE_CASE<br>
 
 *Kotlin Checklist:* <br>
-**Indentation**
+**Indentation**<br>
 - [ ] Kotlin documentation specifies 4 spaces and no tabs<br>
-**Naming**
+**Naming**<br>
 - [ ] Classes and Interfaces: PascalCase
 - [ ] Methods: camelCase
 - [ ] Constants: UPPER_SNAKE_CASE
