@@ -18,7 +18,7 @@ fun change(amount: Long): Map<Int, Long> {
 
 // Write your first then lower case function here
 fun firstThenLowerCase(strings: List<String>, predicate: (String) -> Boolean): String? { 
-    return string.firstOrNull(predicate)?.lowercase() // returns possible String, ?. operator which handles null cases
+    return strings.firstOrNull(predicate)?.lowercase() // returns possible String, ?. operator which handles null cases
 }
 
 // Write your say function here
