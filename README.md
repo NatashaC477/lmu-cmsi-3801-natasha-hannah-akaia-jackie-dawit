@@ -28,14 +28,14 @@ swiftc -o main exercises.swift main.swift && ./main
 
 
 ## BEFORE SUBMITTING
-# *Overall Checklist:* <br>
+### *Overall Checklist:* <br>
 **Clarity:**
 - [ ] Make sure variables, functions, and class names are descriptive and make sense
 
 **Formatting:**
 - [ ] Make sure there's proper indentation throughout the code 
 
-# *Java Checklist:* <br>
+### *Java Checklist:* <br>
 **Indentation**
 - [ ] Google Java Style Guide recommends using 4 spaces for indentation<br>
 
@@ -46,7 +46,7 @@ swiftc -o main exercises.swift main.swift && ./main
 - [ ] Packages: lowercase letters
 - [ ] Enum Type Names: PascalCase | Enum Constants: UPPER_SNAKE_CASE<br>
 
-# *Kotlin Checklist:* <br>
+### *Kotlin Checklist:* <br>
 **Indentation**<br>
 - [ ] Kotlin documentation specifies 4 spaces and no tabs<br>
 
