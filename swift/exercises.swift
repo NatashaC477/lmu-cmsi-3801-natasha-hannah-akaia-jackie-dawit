@@ -1,4 +1,6 @@
 import Foundation
+extension BinarySearchTree: CustomStringConvertible {}
+
 
 struct NegativeAmountError: Error {}
 struct NoSuchFileError: Error {}
@@ -15,13 +17,63 @@ func change(_ amount: Int) -> Result<[Int:Int], NegativeAmountError> {
     return .success(counts)
 }
 
-// Write your first then lower case function here
+func firstThenLowerCase(of array: [String], satisfying predicate: (String) -> Bool) -> String? {
+    if let match = array.first(where: predicate) {
+        return match.lowercased()
+    } else {
+        return nil
+    }
+}
 
-// Write your say function here
+class Say {
+    private var words: [String]
+
+    init(_ word: String = "") {
+        words = [word]
+    }
+
+    private init(words: [String]) {
+        self.words = words
+    }
+
+    func and(_ word: String) -> Say {
+        var newWords = self.words
+        newWords.append(word)
+        return Say(words: newWords)
+    }
+
+    var phrase: String {
+        return words.joined(separator: " ")
+    }
+}
+
+func say(_ word: String = "") -> Say {
+    return Say(word)
+}
 
 // Write your meaningfulLineCount function here
+func meaningfulLineCount(_ fileName: String) async -> Result<Int, Error> {
+    do {
+        // create a URL from the file path
+        let fileURL = URL(fileURLWithPath: fileName)
+        
+        // open the file and read lines asynchronously
+        var count = 0
+        for try await line in fileURL.lines {
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            if !trimmed.isEmpty && !trimmed.hasPrefix("#") {
+                count += 1
+            }
+        }
+        
+        return .success(count)
+        
+    } catch {
+        return .failure(error)
+    }
+}
+ 
 
-// Write your Quaternion struct here
 struct Quaternion: CustomStringConvertible, Equatable {
     let a,b,c,d: Double 
     // static constants 
@@ -89,4 +141,77 @@ struct Quaternion: CustomStringConvertible, Equatable {
 }
 
 
-// Write your Binary Search Tree enum here
+
+enum BinarySearchTree: Equatable {
+    case empty
+    indirect case node(BinarySearchTree, String, BinarySearchTree)
+    
+    // prop to calculate the size of the tree
+    var size: Int {
+        switch self {
+        case .empty:
+            return 0
+        case let .node(left, _, right):
+            return 1 + left.size + right.size
+        }
+    }
+    
+    // checl if the tree contains a specific value
+    func contains(_ value: String) -> Bool {
+        switch self {
+        case .empty:
+            return false
+        case let .node(left, v, right):
+            if value == v {
+                return true
+            } else if value < v {
+                return left.contains(value)
+            } else {
+                return right.contains(value)
+            }
+        }
+    }
+    // insert a new value into the tree
+    func insert(_ value: String) -> BinarySearchTree {
+        switch self {
+        case .empty:
+            return .node(.empty, value, .empty)
+        case let .node(left, v, right):
+            if value < v {
+                return .node(left.insert(value), v, right)
+            } else if value > v {
+                return .node(left, v, right.insert(value))
+            } else {
+                return self // No duplicates in BST
+            }
+        }
+    }
+    
+    // custom string representation of the tree
+    var description: String {
+        switch self {
+        case .empty:
+            return "()"
+        case let .node(.empty, v, .empty):
+            return "(\(v))"
+        case let .node(left, v, .empty):
+            return "(\(left.description)\(v))"
+        case let .node(.empty, v, right):
+            return "(\(v)\(right.description))"
+        case let .node(left, v, right):
+            return "(\(left.description)\(v)\(right.description))"
+        }
+    }
+
+    // equatable conformance
+    static func == (lhs: BinarySearchTree, rhs: BinarySearchTree) -> Bool {
+        switch (lhs, rhs) {
+        case (.empty, .empty):
+            return true
+        case let (.node(left1, value1, right1), .node(left2, value2, right2)):
+            return value1 == value2 && left1 == left2 && right1 == right2
+        default:
+            return false
+        }
+    }
+}
