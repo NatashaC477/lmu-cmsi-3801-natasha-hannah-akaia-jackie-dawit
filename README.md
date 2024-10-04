@@ -1,4 +1,4 @@
-## Programming Languages Homework #2 Submission: Java, Kotlin, Swift
+## Homework #2 Submission: Java, Kotlin, Swift
 **Group Members:** <br>
 Natasha <br>
 Hannah <br>
