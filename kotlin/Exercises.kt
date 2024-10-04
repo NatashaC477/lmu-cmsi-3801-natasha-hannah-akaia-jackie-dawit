@@ -54,7 +54,6 @@ fun meaningfulLineCount(filename: String): Long {
 }
 
 // Write your Quaternion data class here
-
 data class Quaternion(val a: Double, val b: Double, val c: Double, val d: Double) { 
 
     companion object {
