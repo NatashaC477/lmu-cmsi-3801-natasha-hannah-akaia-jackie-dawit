@@ -7,8 +7,8 @@ Jacquelyn Young-Bowers <br>
 Dawit
 
 ### Description:
-This Homework #2 Submission includes the code for Java, Kotlin, and Swift. In the rest of the readme file, the tests for those same coding languages will be found as well as a *checklist* for us to make sure our code follows the rubric and the coding languages styling/formatting. <br><br>
-### Toal said to claim an extra point for this assignment. 
+This Homework #2 Submission includes the code for Java, Kotlin, and Swift. In the rest of the readme file, the tests for those same coding languages will be found as well as a *checklist* for us to make sure our code follows the rubric and the coding languages styling/formatting. <br>
+### Toal said to claim an extra point for this assignment. <br>
 
 ## Homework #2 Tests: Java, Kotlin, Swift
 ### Java
