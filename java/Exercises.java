@@ -20,7 +20,6 @@ public class Exercises {
         return counts;
     }
 
-    // Write your first then lower case function here
     // Method to find the first string that matches a predicate and convert it to lowercase
     static Optional<String> firstThenLowerCase(List<String> list, Predicate<String> predicate) {
         if (list == null || list.isEmpty()) {
@@ -31,7 +30,6 @@ public class Exercises {
                    .findFirst()
                    .map(String::toLowerCase);
 
-    // Write your say function here
     public static class SayBuilder {
         private final List<String> words;
 
@@ -67,8 +65,6 @@ public class Exercises {
         }
     }
 
-
-    // Write your line count function here
     // Method to count meaningful lines in a file
     static int meaningfulLineCount(String filePath) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
