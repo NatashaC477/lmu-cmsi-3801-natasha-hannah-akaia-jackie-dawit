@@ -1,5 +1,5 @@
 ## Programming Languages Homework
-**Group Members:**<br>
+<u><strong>Group Members:</strong></u><br>
 Natasha <br>
 Hannah <br>
 A'kaia <br>
