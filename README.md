@@ -40,9 +40,12 @@ swiftc -o main exercises.swift main.swift && ./main
 - [ ] Google Java Style Guide recommends using 4 spaces for indentation<br>
 
 **Naming**<br>
-- [ ] Classes and Interfaces: PascalCase
-- [ ] Methods: camelCase
+- [ ] Classes and Interfaces: UpperCamelCase
+- [ ] Methods: lowerCamelCase
 - [ ] Constants: UPPER_SNAKE_CASE
+- [ ] Non-Constants: lowerCamelCase
+- [ ] Parameters: lowerCamelCase
+- [ ] Local Variables: lowerCamelCase
 - [ ] Packages: lowercase letters
 - [ ] Enum Type Names: PascalCase | Enum Constants: UPPER_SNAKE_CASE<br>
 
