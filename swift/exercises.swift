@@ -22,17 +22,14 @@ func change(_ amount: Int) -> Result<[Int:Int], NegativeAmountError> {
 // Write your meaningfulLineCount function here
 
 // Write your Quaternion struct here
-import Foundation
 struct Quaternion: CustomStringConvertible, Equatable {
     let a,b,c,d: Double 
-
     // static constants 
     static let ZERO = Quaternion(a: 0, b: 0, c: 0, d: 0) 
     static let ONE = Quaternion(a: 1, b: 0, c: 0, d: 0) 
     static let I = Quaternion(a: 0, b: 1, c: 0, d: 0)   
     static let J = Quaternion(a: 0, b: 0, c: 1, d: 0)  
     static let K = Quaternion(a: 0, b: 0, c: 0, d: 1)  
-
     // initializer but defualt so any part can be omitted
     init(a: Double = 0, b: Double = 0, c: Double = 0, d: Double = 0) {
         self.a = a
@@ -48,12 +45,10 @@ struct Quaternion: CustomStringConvertible, Equatable {
     var conjugate: Quaternion {
         return Quaternion(a: a, b: -b, c: -c, d: -d)
     }
-
      // addition 
     static func +(lhs: Quaternion, rhs: Quaternion) -> Quaternion {
         return Quaternion(a: lhs.a + rhs.a, b: lhs.b + rhs.b, c: lhs.c + rhs.c, d: lhs.d + rhs.d)
     }
-
     // multiplication 
     static func *(lhs: Quaternion, rhs: Quaternion) -> Quaternion {
         return Quaternion(
@@ -63,7 +58,6 @@ struct Quaternion: CustomStringConvertible, Equatable {
             d: lhs.a * rhs.d + lhs.b * rhs.c - lhs.c * rhs.b + lhs.d * rhs.a   // k part
         )
     }
-
     // equal check between two quaternions
     static func ==(lhs: Quaternion, rhs: Quaternion) -> Bool {
         return abs(lhs.a - rhs.a) < 1e-10 &&
@@ -71,11 +65,9 @@ struct Quaternion: CustomStringConvertible, Equatable {
                abs(lhs.c - rhs.c) < 1e-10 &&
                abs(lhs.d - rhs.d) < 1e-10
     }
-
     // provides a string representation of the quaternion, omitting zero parts
     var description: String {
         var parts: [String] = []
-
         if a != 0 {
             parts.append("\(a)") 
         }
@@ -91,12 +83,10 @@ struct Quaternion: CustomStringConvertible, Equatable {
             // append k part 
             parts.append(d == 1 ? "k" : (d == -1 ? "-k" : "\(d)k"))
         }
-
         // join parts
         return parts.isEmpty ? "0" : parts.joined(separator: "+").replacingOccurrences(of: "+-", with: "-")
     }
 }
-
 
 
 // Write your Binary Search Tree enum here
