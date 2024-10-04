@@ -1,28 +1,15 @@
-# Homework Template for CMSI 3801
+## Programming Languages Homework
+Group Members:
+Natasha
+Hannah
+A'kaia
+Jacquelyn Young-Bowers
+Dawit
 
-Welcome!
 
-## Instructions
+## How to test in each coding language
 
-Fork this repo for your homework submissions. Make sure your fork has a nice, descriptive name. Leaving the name as “lmu-cmsi-3801-template” is misleading, and keeping it indicates you are not taking sufficient pride in your work. After forking, **please replace the contents of this readme** file with information about your submissions, including the name(s) of the students, and a description of each assignment (as they are turned in).
-
-Don’t bother with notes to the graders. Such notes go into your BrightSpace submissions, not your GitHub repository.
-
-Your homework submissions will consist of programs in the following languages. To keep things simple, there is a separate folder for each language.
-
-- **Homework 1 (Scripting)**: Lua, Python, JavaScript
-- **Homework 2 (Enterprise)**: Java, Kotlin, Swift
-- **Homework 3 (Theory)**: TypeScript, OCaml, Haskell
-- **Homework 4 (Systems)**: C, C++, Rust
-- **Homework 5 (Concurrency)**: Go
-
-At each homework deadline, the graders will clone your repo and run the tests. I will be inspecting the source code, grading your work on style, clarity, and appropriate use of language idioms. Do not throw away points in these areas: **use code formatters and linters**. Please consider it a moral obligation to use these tools. Not doing so is a violation of professional ethics. _You must respect the naming, capitalization, formatting, spacing, and indentation conventions of each language_.
-
-## The Test Suites
-
-The test files are included in the repo already. They are available for YOU! They will help you not only learn the languages and concepts covered in this course, but to help you with professional practice. You should get accustomed to writing code to make tests pass. As you grow in your profession, you will get used to writing your tests early.
-
-The test suites are run like so (assuming you have a Unix-like shell, modify as necessary if you have Windows):
+Homework #1: Lua, Python, JavaScript
 
 ### Lua
 
@@ -42,6 +29,7 @@ python3 exercises_test.py
 npm test
 ```
 
+Homework #2: Java, Kotlin, Swift
 ### Java
 
 ```
