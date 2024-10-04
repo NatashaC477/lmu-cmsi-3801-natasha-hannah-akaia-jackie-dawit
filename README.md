@@ -3,7 +3,7 @@ Group Members:<br>
 Natasha <br>
 Hannah <br>
 A'kaia <br>
-Jacquelyn Young-Bowers <be>
+Jacquelyn Young-Bowers <br>
 Dawit
 
 
