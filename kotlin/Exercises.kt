@@ -54,6 +54,7 @@ fun meaningfulLineCount(filename: String): Long {
 }
 
 // Write your Quaternion data class here
+
 data class Quaternion(val a: Double, val b: Double, val c: Double, val d: Double) { 
 
     companion object {
@@ -62,6 +63,13 @@ data class Quaternion(val a: Double, val b: Double, val c: Double, val d: Double
         val J = Quaternion(0.0, 0.0, 1.0, 0.0)
         val K = Quaternion(0.0, 0.0, 0.0, 1.0)
     }
+
+    init { // making sure that NaN cannot be passed in
+        require(!(a.isNaN() || b.isNaN() || c.isNaN() || d.isNaN())) {
+            "Coefficients cannot be NaN"
+        }
+    }
+
     operator fun plus(other: Quaternion): Quaternion { // using operator fun to overload + operator (addition)
         return Quaternion(a + other.a, b + other.b, c + other.c, d + other.d)
     }
@@ -103,17 +111,11 @@ data class Quaternion(val a: Double, val b: Double, val c: Double, val d: Double
 
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Quaternion) return false
-    }
-
     fun coefficients(): List<Double> = listOf(a, b, c, d)
 
     fun conjugate(): Quaternion = Quaternion(a, -b, -c, -d)
 }
-
-
+        
 
 // Write your Binary Search Tree interface and implementing classes here
 sealed interface BinarySearchTree {
