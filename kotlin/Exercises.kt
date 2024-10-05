@@ -110,7 +110,7 @@ data class Quaternion(val a: Double, val b: Double, val c: Double, val d: Double
 
     fun conjugate(): Quaternion = Quaternion(a, -b, -c, -d)
 }
-        
+    
 sealed interface BinarySearchTree {
     // method to insert a new value into the tree, returning a new instance 
     fun insert(value: String): BinarySearchTree
@@ -153,14 +153,11 @@ sealed interface BinarySearchTree {
             return when {
                 value < this.value -> left.contains(value)
                 value > this.value -> right.contains(value)
-                else -> true // Value found
+                else -> true 
             }
         }
-
         // calculate the size of the tree, counting this node and its children
         override fun size(): Int = 1 + left.size() + right.size()
-
-        // string representation of the tree in the expected format
         override fun toString(): String {
             val leftStr = left.toString().takeIf { it != "()" } ?: ""
             val rightStr = right.toString().takeIf { it != "()" } ?: ""

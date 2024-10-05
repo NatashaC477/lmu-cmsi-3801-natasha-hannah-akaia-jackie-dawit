@@ -51,7 +51,6 @@ func say(_ word: String = "") -> Say {
     return Say(word)
 }
 
-// Write your meaningfulLineCount function here
 func meaningfulLineCount(_ fileName: String) async -> Result<Int, Error> {
     do {
         // create a URL from the file path
@@ -72,7 +71,6 @@ func meaningfulLineCount(_ fileName: String) async -> Result<Int, Error> {
         return .failure(error)
     }
 }
- 
 
 struct Quaternion: CustomStringConvertible, Equatable {
     let a,b,c,d: Double 
@@ -139,9 +137,6 @@ struct Quaternion: CustomStringConvertible, Equatable {
         return parts.isEmpty ? "0" : parts.joined(separator: "+").replacingOccurrences(of: "+-", with: "-")
     }
 }
-
-
-
 enum BinarySearchTree: Equatable {
     case empty
     indirect case node(BinarySearchTree, String, BinarySearchTree)
@@ -155,7 +150,6 @@ enum BinarySearchTree: Equatable {
             return 1 + left.size + right.size
         }
     }
-    
     // checl if the tree contains a specific value
     func contains(_ value: String) -> Bool {
         switch self {
@@ -186,7 +180,6 @@ enum BinarySearchTree: Equatable {
             }
         }
     }
-    
     // custom string representation of the tree
     var description: String {
         switch self {
@@ -202,7 +195,6 @@ enum BinarySearchTree: Equatable {
             return "(\(left.description)\(v)\(right.description))"
         }
     }
-
     // equatable conformance
     static func == (lhs: BinarySearchTree, rhs: BinarySearchTree) -> Bool {
         switch (lhs, rhs) {
