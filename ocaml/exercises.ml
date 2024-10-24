@@ -12,13 +12,32 @@ let change amount =
     in
     aux amount denominations
 
-(* Write your first then apply function here *)
+let rec first_then_apply lst predicate transform =
+  match lst with
+  | [] -> None (* Return None if the list is empty *)
+  | x :: xs ->
+      if predicate x then transform x else first_then_apply xs predicate transform (* Apply the transformation if the predicate is satisfied *)
 
-(* Write your powers generator here *)
+let powers_generator base =
+  let rec aux n () =
+    Seq.Cons (n, aux (n * base)) (* Generate the next power in the sequence *)
+  in
+  aux 1
 
-(* Write your line count function here *)
-
-(* Write your shape type and associated functions here *)
+let meaningful_line_count filename =
+  let in_channel = open_in filename in (* Open the file for reading *)
+  let rec count_lines acc =
+    try
+      let line = input_line in_channel |> String.trim in (* Read and trim each line *)
+      if line <> "" && not (String.starts_with ~prefix:"#" line) then
+        count_lines (acc + 1) (* Increment the count for non-empty, non-comment lines *)
+      else
+        count_lines acc (* Skip empty or comment lines *)
+    with End_of_file ->
+      close_in in_channel; (* Close the file when done *)
+      acc
+  in
+  count_lines 0
 
 
 type shape = 
