@@ -1,4 +1,4 @@
-## Homework #2 Submission: Java, Kotlin, Swift
+## Homework #2 Submission: TypeScript, OCaml, Haskell
 **Group Members:** <br>
 Natasha Cordova-Diba <br>
 Hannah Holden <br>
@@ -7,26 +7,25 @@ Jacquelyn Young-Bowers <br>
 Dawit Solomon
 
 ### Description:
-This Homework #2 Submission includes the code for Java, Kotlin, and Swift. In the rest of the readme file, the tests for those same coding languages will be found as well as a *checklist* for us to make sure our code follows the rubric and the coding languages styling/formatting. <br>
-### Toal said to claim an extra point for this assignment. <br>
+This Homework #2 Submission includes the code for TypeScript, OCaml, and Haskell. In the rest of the readme file, the tests for those same coding languages will be found as well as a *checklist* for us to make sure our code follows the rubric and the coding languages styling/formatting. <br>
 
-## Homework #2 Tests: Java, Kotlin, Swift
-### Java
-
-```
-javac *.java && java ExercisesTest
-```
-
-### Kotlin
+## Homework #2 Tests: TypeScript, OCaml, Haskell
+### TypeScript
 
 ```
-kotlinc *.kt -include-runtime -d test.jar && java -jar test.jar
+npm test
 ```
 
-### Swift
+### OCaml
 
 ```
-swiftc -o main exercises.swift main.swift && ./main
+ocamlc exercises.ml exercises_test.ml && ./a.out
+```
+
+### Haskell
+
+```
+ghc ExercisesTest.hs && ./ExercisesTest
 ```
 
 
@@ -38,50 +37,48 @@ swiftc -o main exercises.swift main.swift && ./main
 **Line Spacing:**
 - [x] Use to separate methods, fields, and logical sections of code
 
-### *Java Checklist:* <br>
+### *TypeScript Checklist:* <br>
 **Indentation**
-- [x] Google Java Style Guide recommends using 4 spaces for indentation<br>
+- [x] TypeScript Style Guide recommends using 2 spaces for indentation<br>
 
 **Naming**<br>
 - [x] Classes and Interfaces: UpperCamelCase
-- [x] Methods: lowerCamelCase
+- [x] Functions and Methods: lowerCamelCase
 - [x] Constants: UPPER_SNAKE_CASE
-- [x] Non-Constants: lowerCamelCase
 - [x] Parameters: lowerCamelCase
-- [x] Local Variables: lowerCamelCase
-- [x] Packages: lowercase letters
-- [x] Enum Type Names: UpperCamelCase | Enum Constants: UPPER_SNAKE_CASE<br>
+- [x] Enum Type Names: UpperCamelCase | Enum Members: UPPER_SNAKE_CASE<br>
 
 **Comments**<br>
-- [x] // to write a comment
+- [x] // to write a single-line comment
+- [x] /* */ to write a multi-line comment
 
-### *Kotlin Checklist:* <br>
+### *OCaml Checklist:* <br>
 **Indentation**<br>
-- [x] Kotlin documentation specifies 4 spaces and no tabs<br>
+- [x] OCaml Style Guide recommends using 2 spaces for indentation<br>
 
 **Naming**<br>
-- [x] Classes and Interfaces: UpperCamelCase
-- [x] Functions: lowerCamelCase
-- [x] Properties (Variables): lowerCamelCase
-- [x] Constants: UPPER_SNAKE_CASE
-- [x] Packages: lowercase letters
-- [x] Enum Type Names: UpperCamelCase | Enum Constants: UPPER_SNAKE_CASE
+- [x] Modules: UpperCamelCase
+- [x] Functions and Variables: lower_snake_case
+- [x] Constants: lower_snake_case
+- [x] Types: UpperCamelCase
+- [x] Constructors: UpperCamelCase
+- [x] Exceptions: UpperCamelCase
       
 **Comments**<br>
-- [x] // to write a comment
+- [x] (* to write a comment *)
 
-### *Swift Checklist:* <br>
+### *Haskell Checklist:* <br>
 **Indentation**<br>
-- [x] Apple's Swift API Design Guidelines recommends 4 spaces<br>
+- [x] Haskell Style Guide recommends using 2 or 4 spaces for indentation<br>
 
 **Naming**<br>
-- [x] Classes and Interfaces: UpperCamelCase
-- [x] Methods and Functions: lowerCamelCase
-- [x] Variables and Constants: lowerCamelCase
-- [x] Type Aliases: UpperCamelCase
-- [x] Protocols: UpperCamelCase
-- [x] Enum Type Names: UpperCamelCase | Enum Constants: UpperCamelCase
-- [x] Packages: lowercase
+- [x] Modules: UpperCamelCase
+- [x] Functions and Variables: lowerCamelCase
+- [x] Constants: lowerCamelCase
+- [x] Types: UpperCamelCase
+- [x] Constructors: UpperCamelCase
+- [x] Type Classes: UpperCamelCase
 
 **Comments**<br>
-- [x] // to write a comment
+- [x] -- to write a single-line comment
+- [x] {- -} to write a multi-line comment
