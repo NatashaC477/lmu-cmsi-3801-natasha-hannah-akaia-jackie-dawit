@@ -25,8 +25,8 @@ change amount
         newCounts = Map.insert d count counts
 
 -- Write your first then apply function here
-firstThenApply :: [a] -> (a -> Bool) -> (a -> b) -> Maybe a
-firstThenApply predicate f xs = f <$> find predicate xs -- fmap implemented
+firstThenApply :: [a] -> (a -> Bool) -> (a -> b) -> Maybe b
+firstThenApply xs predicate f = f <$> find predicate xs -- fmap implemented
 
 -- Write your infinite powers generator here
 powers :: (Integral a) => a -> [a] -- integral implemented to handle floats
