@@ -24,10 +24,10 @@ change amount
         newCounts = Map.insert d count counts
 
 firstThenApply :: [a] -> (a -> Bool) -> (a -> b) -> Maybe b
-firstThenApply xs predicate f = f <$> find predicate xs -- fmap implemented
+firstThenApply xs predicate f = f <$> find predicate xs
 
-powers :: (Integral a) => a -> [a] -- integral implemented to handle floats
-powers base = iterate (* base) 1 -- section implemented
+powers :: (Integral a) => a -> [a]
+powers base = iterate (* base) 1
 
 meaningfulLineCount :: FilePath -> IO Int
 meaningfulLineCount filePath = do
@@ -37,7 +37,7 @@ meaningfulLineCount filePath = do
       isMeaningfulLine line = 
         not (allWhiteSpace line) && 
         not ("#" `isPrefixOf` (trimStart line))
-  return $ length $ filter isMeaningfulLine $ lines document -- readfile autocloses file
+  return $ length $ filter isMeaningfulLine $ lines document
 
 -- Write your shape data type here
 
