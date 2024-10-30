@@ -14,7 +14,7 @@ let change amount =
 
 let rec first_then_apply lst predicate transform =
   match lst with
-  | [] -> None (* Return None if the list is empty *)
+  | [] -> None
   | x :: xs ->
       if predicate x then transform x else first_then_apply xs predicate transform
 
