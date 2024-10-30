@@ -3,7 +3,6 @@ module Exercises
     firstThenApply,
     powers,
     meaningfulLineCount,
-  -- put the proper exports here
   )
 where
 
@@ -24,20 +23,21 @@ change amount
         (count, newRemaining) = remaining `divMod` d
         newCounts = Map.insert d count counts
 
--- Write your first then apply function here
 firstThenApply :: [a] -> (a -> Bool) -> (a -> b) -> Maybe b
 firstThenApply xs predicate f = f <$> find predicate xs -- fmap implemented
 
--- Write your infinite powers generator here
 powers :: (Integral a) => a -> [a] -- integral implemented to handle floats
 powers base = iterate (* base) 1 -- section implemented
--- Write your line count function here
-meaningfulLineCount :: FilePath -> IO Int 
-meaningfulLineCount path = do
-  contents <- readFile path
-  return $ length $ filter meaningfulLine $ lines contents
-  where 
-    meaningfulLine line = not (all isSpace line) && not ("--" `isPrefixOf` line)
+
+meaningfulLineCount :: FilePath -> IO Int
+meaningfulLineCount filePath = do
+  document <- readFile filePath
+  let allWhiteSpace = all isSpace
+      trimStart = dropWhile isSpace
+      isMeaningfulLine line = 
+        not (allWhiteSpace line) && 
+        not ("#" `isPrefixOf` (trimStart line))
+  return $ length $ filter isMeaningfulLine $ lines document -- readfile autocloses file
 
 -- Write your shape data type here
 
