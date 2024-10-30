@@ -16,25 +16,25 @@ let rec first_then_apply lst predicate transform =
   match lst with
   | [] -> None (* Return None if the list is empty *)
   | x :: xs ->
-      if predicate x then transform x else first_then_apply xs predicate transform (* Apply the transformation if the predicate is satisfied *)
+      if predicate x then transform x else first_then_apply xs predicate transform
 
 let powers_generator base =
   let rec aux n () =
-    Seq.Cons (n, aux (n * base)) (* Generate the next power in the sequence *)
+    Seq.Cons (n, aux (n * base))
   in
   aux 1
 
 let meaningful_line_count filename =
-  let in_channel = open_in filename in (* Open the file for reading *)
+  let in_channel = open_in filename in 
   let rec count_lines acc =
     try
-      let line = input_line in_channel |> String.trim in (* Read and trim each line *)
+      let line = input_line in_channel |> String.trim in 
       if line <> "" && not (String.starts_with ~prefix:"#" line) then
-        count_lines (acc + 1) (* Increment the count for non-empty, non-comment lines *)
+        count_lines (acc + 1) 
       else
-        count_lines acc (* Skip empty or comment lines *)
+        count_lines acc 
     with End_of_file ->
-      close_in in_channel; (* Close the file when done *)
+      close_in in_channel; 
       acc
   in
   count_lines 0
