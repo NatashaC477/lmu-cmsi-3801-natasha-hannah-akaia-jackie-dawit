@@ -1,4 +1,4 @@
-## Homework #2 Submission: TypeScript, OCaml, Haskell
+## Homework #3 Submission: TypeScript, OCaml, Haskell
 **Group Members:** <br>
 Natasha Cordova-Diba <br>
 Hannah Holden <br>
@@ -7,9 +7,9 @@ Jacquelyn Young-Bowers <br>
 Dawit Solomon
 
 ### Description:
-This Homework #2 Submission includes the code for TypeScript, OCaml, and Haskell. In the rest of the readme file, the tests for those same coding languages will be found as well as a *checklist* for us to make sure our code follows the rubric and the coding languages styling/formatting. <br>
+This Homework #3 Submission includes the code for TypeScript, OCaml, and Haskell. In the rest of the readme file, the tests for those same coding languages will be found as well as a *checklist* for us to make sure our code follows the rubric and the coding languages styling/formatting. <br>
 
-## Homework #2 Tests: TypeScript, OCaml, Haskell
+## Homework #3 Tests: TypeScript, OCaml, Haskell
 ### TypeScript
 
 ```
