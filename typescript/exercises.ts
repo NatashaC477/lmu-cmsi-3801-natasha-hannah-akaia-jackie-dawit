@@ -13,12 +13,57 @@ export function change(amount: bigint): Map<bigint, bigint> {
   return counts
 }
 
-// Write your first then apply function here
+export function firstThenApply<A, B>(
+  array: A[],
+  predicate: (value: A) => boolean,
+  transform: (value: A) => B
+): B | undefined {
+  const firstMatch = array.find(predicate);
+  return firstMatch !== undefined ? transform(firstMatch) : undefined;
+}
 
-// Write your powers generator here
+interface PowersConfig {
+  ofBase: bigint;
+}
 
-// Write your line count function here
+export function* powersGenerator({ ofBase }: PowersConfig): Generator<bigint> {
+  let power = BigInt(1); // Converted 1n to BigInt(1)
+  while (true) {
+    yield power;
+    power = power * ofBase;
+  }
+}
 
+import { createReadStream } from 'fs';
+import { createInterface } from 'readline';
+
+export async function meaningfulLineCount(filename: string): Promise<number> {
+  let count = 0;
+  
+  const fileStream = createReadStream(filename);
+  const rl = createInterface({
+    input: fileStream,
+    crlfDelay: Infinity
+  });
+
+  try {
+    for await (const line of rl) {
+      const trimmedLine = line.trim();
+      if (trimmedLine && !trimmedLine.startsWith('#')) {
+        count++;
+      }
+    }
+    return count;
+  } catch (error: any) {
+    if (error.code === 'ENOENT') {
+      throw new Error(`No such file: ${filename}`);
+    }
+    throw error;
+  } finally {
+    rl.close();
+    fileStream.destroy();
+  }
+}
 
 interface Sphere {
   kind: "Sphere"
