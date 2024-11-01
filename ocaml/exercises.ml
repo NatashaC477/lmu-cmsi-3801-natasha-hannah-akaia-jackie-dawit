@@ -43,12 +43,10 @@ let meaningful_line_count filename =
 type shape = 
   | Sphere of float
   | Box of float * float * float
-(* volume of the shape *)
 let volume s =
   match s with
   | Sphere r -> Float.pi *. (r ** 3.) *. 4. /. 3.
   | Box (l, w, h) -> l *. w *. h 
-(* surface area of the shape *)
 let surface_area s =
   match s with
   | Sphere r -> 4. *. Float.pi *. (r ** 2.)
@@ -57,35 +55,33 @@ let surface_area s =
 
 
 
-type 'a binary_search_tree = 
+  type 'a binary_search_tree = 
   | Empty
   | Node of 'a binary_search_tree * 'a * 'a binary_search_tree
-(* size of the tree *)
+
 let rec size tree = 
   match tree with 
   | Empty -> 0
   | Node (left, _, right) -> 1 + size left + size right
 
-(*  check if a value exists in the tree *)
-let rec contains value tree =
+let rec contains element tree =
   match tree with 
   | Empty -> false
-  | Node (left, v, right) -> 
-      if value = v then true
-      else if value < v then contains value left
-      else contains value right
+  | Node (left, node_value, right) -> 
+      if element = node_value then true
+      else if element < node_value then contains element left
+      else contains element right
 
-(* return the inorder traversal of the tree *)
 let rec inorder tree = 
   match tree with 
   | Empty -> []
-  | Node (left, v, right) -> inorder left @ [v] @ inorder right
+  | Node (left, node_value, right) -> inorder left @ [node_value] @ inorder right
 
-(* insert a value into the tree *)
-let rec insert value tree =
+let rec insert element tree =
   match tree with
-  | Empty -> Node (Empty, value, Empty)
-  | Node (left, v, right) ->
-      if value < v then Node (insert value left, v, right)
-      else if value > v then Node (left, v, insert value right)
-      else tree  
+  | Empty -> Node (Empty, element, Empty)
+  | Node (left, node_value, right) ->
+      if element < node_value then Node (insert element left, node_value, right)
+      else if element > node_value then Node (left, node_value, insert element right)
+      else tree
+
