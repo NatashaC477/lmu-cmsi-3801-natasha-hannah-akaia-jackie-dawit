@@ -3,7 +3,16 @@ module Exercises
     firstThenApply,
     powers,
     meaningfulLineCount,
-  )
+    volume,
+    surfaceArea,
+    Shape(..),
+    is_approx,
+    BST(..),
+    insert,
+    contains,
+    size,
+    inorder
+  ) 
 where
 
 import Data.Char (isSpace)
@@ -39,24 +48,6 @@ meaningfulLineCount filePath = do
         not ("#" `isPrefixOf` (trimStart line))
   return $ length $ filter isMeaningfulLine $ lines document
 
-here are the imports: 
-
-
-module Exercises
-    ( change,
-      volume,
-      surfaceArea,
-      Shape(..),
-      is_approx,
-      BST(..),
-      insert,
-      contains,
-      size,
-      inorder
-    ) where
-and this is all of the new code: 
-
-
 -- Write your shape data type here
 data Shape = Box Double Double Double
            | Sphere Double
@@ -84,7 +75,6 @@ instance (Show a, Eq a) => Show (BST a) where
         let leftStr = if left == Empty then "" else show left
             rightStr = if right == Empty then "" else show right
         in "(" ++ leftStr ++ show x ++ rightStr ++ ")"
-
 
 insert :: (Ord a) => a -> BST a -> BST a
 insert x Empty = Node x Empty Empty
