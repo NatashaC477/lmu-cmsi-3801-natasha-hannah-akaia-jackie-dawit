@@ -39,6 +39,71 @@ meaningfulLineCount filePath = do
         not ("#" `isPrefixOf` (trimStart line))
   return $ length $ filter isMeaningfulLine $ lines document
 
+here are the imports: 
+
+
+module Exercises
+    ( change,
+      volume,
+      surfaceArea,
+      Shape(..),
+      is_approx,
+      BST(..),
+      insert,
+      contains,
+      size,
+      inorder
+    ) where
+and this is all of the new code: 
+
+
 -- Write your shape data type here
+data Shape = Box Double Double Double
+           | Sphere Double
+           deriving (Show, Eq)
+
+volume :: Shape -> Double
+volume (Box w h d) = w * h * d
+volume (Sphere r)  = (4 / 3) * pi * r^3
+
+surfaceArea :: Shape -> Double
+surfaceArea (Box w h d) = 2 * (w * h + h * d + d * w)
+surfaceArea (Sphere r)  = 4 * pi * r^2
+
+is_approx :: Double -> Double -> Bool
+is_approx a b = abs (a - b) < 1e-6
 
 -- Write your binary search tree algebraic type here
+data BST a = Empty
+           | Node a (BST a) (BST a)
+           deriving (Eq)
+
+instance (Show a, Eq a) => Show (BST a) where
+    show Empty = "()"
+    show (Node x left right) =
+        let leftStr = if left == Empty then "" else show left
+            rightStr = if right == Empty then "" else show right
+        in "(" ++ leftStr ++ show x ++ rightStr ++ ")"
+
+
+insert :: (Ord a) => a -> BST a -> BST a
+insert x Empty = Node x Empty Empty
+insert x (Node y left right)
+    | x < y     = Node y (insert x left) right
+    | x > y     = Node y left (insert x right)
+    | otherwise = Node y left right  
+
+contains :: (Ord a) => a -> BST a -> Bool
+contains _ Empty = False
+contains x (Node y left right)
+    | x < y     = contains x left
+    | x > y     = contains x right
+    | otherwise = True
+
+size :: BST a -> Int
+size Empty = 0
+size (Node _ left right) = 1 + size left + size right
+
+inorder :: BST a -> [a]
+inorder Empty = []
+inorder (Node x left right) = inorder left ++ [x] ++ inorder right
