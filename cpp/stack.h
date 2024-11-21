@@ -21,31 +21,41 @@ using namespace std;
 
 template <typename T>
 class Stack {
-  // Add three fields: elements, a smart pointer to the array of elements,
-  // capacity, the current capacity of the array, and top, the index of the
-  // next available slot in the array.
+  unique_ptr<T[]> elements;
+  size_t capacity;
+  size_t top;
+
+  void reallocate(size_t new_capacity) {
+    if (new_capacity > MAX_CAPACITY) throw overflow_error("Stack has reached maximum capacity");
+    if (new_capacity < INITIAL_CAPACITY) new_capacity = INITIAL_CAPACITY;
+    unique_ptr<T[]> new_elements = make_unique<T[]>(new_capacity);
+    copy(elements.get(), elements.get() + top, new_elements.get());
+    elements = move(new_elements);
+    capacity = new_capacity;
+  }
 
   // Prohibit copying and assignment
-  
+  Stack(const Stack&) = delete;
+  Stack& operator=(const Stack&) = delete;
+
 public:
-  // Write your stack constructor here
+  Stack() : elements(make_unique<T[]>(INITIAL_CAPACITY)), capacity(INITIAL_CAPACITY), top(0) {}
 
-  // Write your size() method here
+  size_t size() const { return top; }
 
-  // Write your is_empty() method here
+  bool is_empty() const { return top == 0; }
 
-  // Write your is_full() method here
+  bool is_full() const { return top == capacity; }
 
-  // Write your push() method here
+  void push(const T& value) {
+    if (is_full()) reallocate(capacity * 2);
+    elements[top++] = value;
+  }
 
-  // Write your pop() method here
-
-private:
-  // We recommend you make a PRIVATE reallocate method here. It should
-  // ensure the stack capacity never goes above MAX_CAPACITY or below
-  // INITIAL_CAPACITY. Because smart pointers are involved, you will need
-  // to use std::move() to transfer ownership of the new array to the stack
-  // after (of course) copying the elements from the old array to the new
-  // array with std::copy().
-
+  T pop() {
+    if (is_empty()) throw underflow_error("cannot pop from empty stack");
+    T value = elements[--top];
+    if (top < capacity / 4 && capacity > INITIAL_CAPACITY) reallocate(capacity / 2);
+    return value;
+  }
 };
