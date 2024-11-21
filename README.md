@@ -1,4 +1,4 @@
-## Homework #4 Submission: TypeScript, OCaml, Haskell
+## Homework #4 Submission: C, C++, Rust
 **Group Members:** <br>
 Natasha Cordova-Diba <br>
 Hannah Holden <br>
