@@ -7,59 +7,65 @@ import (
 	"time"
 	"sync/atomic"
 )
-
-// A little utility that simulates performing a task for a random duration.
-// For example, calling do(10, "Remy", "is cooking") will compute a random
-// number of milliseconds between 5000 and 10000, log "Remy is cooking",
-// and sleep the current goroutine for that much time.
-
-func do(seconds int, action ...any) {
-    log.Println(action...)
-    randomMillis := 500 * seconds + rand.Intn(500 * seconds)
-    time.Sleep(time.Duration(randomMillis) * time.Millisecond)
+func logAction(action ...any) {
+	log.Println(action...)
 }
-
+func do(seconds int, action ...any) {
+	logAction(action...)
+	randomMillis := 500*seconds + rand.Intn(500*seconds)
+	time.Sleep(time.Duration(randomMillis) * time.Millisecond)
+}
 type Order struct {
-	id uint64
-	customer string
-	// make a replay which ic a channel that can take the order (HINT you need a pointer to the order)
-	// Also the name of the cook
+	id        uint64
+	customer  string
+	preparedBy string
+	reply     chan *Order
 }
 var nextId atomic.Uint64
-
+//3 outstanding orders
 var Waiter = make(chan *Order, 3)
-
 func Cook(name string) {
-	// log that the cook is starting
-	// loop forever
-	// wait for an order from the waiter
-	// cook it
-	// put the name of the cook in the order
-	// send it back into the reply channel: order.replay <- order
+	logAction(name, "starting work")
+	for order := range Waiter {
+		do(10, name, "cooking order", order.id, "for", order.customer)
+		order.preparedBy = name
+		order.reply <- order
+	}
 }
-
 func Customer(name string, wg *sync.WaitGroup) {
-	for mealsEaten := 0; mealsEaten < 5; {
-		// place an order
-		// select statement so that if the waiter gets it with 7 seconds 
-			// then you get it from the cook, and eat it 
-			// if you don't get leave the restaurant
-			// do(5, name, "is waiting too long, abandoning the order", order.id)
-	} 
-
+	defer wg.Done()
+	mealsEaten := 0
+	for mealsEaten < 5 {
+		order := &Order{
+			id:       nextId.Add(1),
+			customer: name,
+			reply:    make(chan *Order, 1),
+		}
+		logAction(name, "placed order", order.id)
+		select {
+		case Waiter <- order:
+			select {
+			case completedOrder := <-order.reply:
+				do(2, name, "eating cooked order", completedOrder.id, "prepared by", completedOrder.preparedBy)
+				mealsEaten++
+			}
+		case <-time.After(7 * time.Second):
+			do(5, name, "waited too long, abandoning order", order.id)
+		}
+	}
+	logAction(name, "finished dining and is going home")
 }
-
 func main() {
-	customers := [10]string{
-		"Ani", "Bai", "Cat", "Dao", "Eve", "Fay", "Gus", "Hua", "Iza", "Jai",
-	}
-	var wg sync
-	for _, customer := range customers {
-		wg.Add(1)
-		go Customer(customer, &wg)
-	}
+	rand.Seed(time.Now().UnixNano())
+	customers := []string{"Ani", "Bai", "Cat", "Dao", "Eve", "Fay", "Gus", "Hua", "Iza", "Jai"}
+	var wg sync.WaitGroup
 	go Cook("Remy")
-	go Cook("Linguini")
 	go Cook("Colette")
-	log.Println("Restaurant closing")
+	go Cook("Linguini")
+	for _, name := range customers {
+		wg.Add(1)
+		go Customer(name, &wg)
+	}
+	wg.Wait()
+	logAction("The restaurant is closing for the day")
 }
